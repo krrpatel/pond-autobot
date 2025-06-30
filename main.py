@@ -167,7 +167,7 @@ scheduled_vote()
 schedule.every(24).hours.do(scheduled_post)
 schedule.every(48).hours.do(scheduled_vote)
 
-print("✅ Bot is running. NEXT VOTE WILL BE DONE AFTER 48 HOUR and POST WILL BE DONE AFTER 24 HOUR")
+print("✅ Bot is running.\nNEXT VOTE WILL BE DONE AFTER 48 HOUR and POST WILL BE DONE AFTER 24 HOUR")
 while True:
     schedule.run_pending()
     time.sleep(30)
