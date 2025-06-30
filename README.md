@@ -36,7 +36,7 @@ An intelligent automation bot for [CryptoPond.xyz](https://cryptopond.xyz) that:
 
 ```bash
 git clone https://github.com/krrpatel/pond-autobot.git
-cd cryptopond-auto-bot
+cd pond-autobot
 ```
 
 ### 2 . enable venv
