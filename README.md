@@ -58,6 +58,23 @@ pip install requests schedule google-generativeai
 python3 main.py
 ```
 
+### 5 . get jwt string
+
+step 1 : Open [https://cryptopond.xyz](https://cryptopond.xyz/points) and log in.
+
+step 2 : Open DevTools → Console tab and refresh
+
+step 3 : Paste the script above and hit Enter.
+```bash
+localStorage.getItem('frontierUserInfo')
+```
+step 4 : Copy string like below sample
+
+```bash
+{"developer_id":12345,"email":"user@example.com","picture":"https://example.com/sample-profile.jpg","name":"sampleuser","iss":"frontier","exp":1751522698,"iat":1751263498,"jwt":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXZlbG9wZXJfaWQiOjEyMzQ1LCJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJuYW1lIjoic2FtcGxldXNlciIsImlzcyI6ImZyb250aWVyIiwiZXhwIjoxNzUxNTIyNjk4LCJpYXQiOjE3NTEyNjM0OTh9.dummy_signature_1234567890"}
+```
+
+
 📝 On first run, you'll be prompted for:
 
 - Developer ID
