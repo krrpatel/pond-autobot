@@ -157,17 +157,22 @@ def scheduled_vote():
     vote_count, ws, we = get_vote_history()
     remaining = max(0, 3 - vote_count)
     print(f"\n🗓️ Voting Period: {ws} to {we} | ✅ Votes Left: {remaining}")
+
     ideas = get_unvoted_ideas()
     if not ideas:
         print("🟡 No unvoted ideas available.")
         return
-    for idea in ideas[:remaining]:
-        print(f"🗳️ Voting on: {idea['name']} (ID: {idea['id']})")
-        success = vote_on_idea(idea['id'])
-        print("✅ Success" if success else "❌ Failed")
+
+    # Only vote on the first available unvoted idea
+    idea = ideas[0]
+    print(f"🗳️ Voting on: {idea['name']} (ID: {idea['id']})")
+    success = vote_on_idea(idea['id'])
+    print("✅ Success" if success else "❌ Failed")
+
     config["last_vote_time"] = datetime.now().isoformat()
     with open(CONFIG_FILE, "w") as f:
         json.dump(config, f, indent=2)
+
 
 # Run immediately once, then schedule
 scheduled_post()
