@@ -17,17 +17,26 @@ def load_or_ask_config():
             print("✅ Loaded config from config.json")
             return config
     else:
-        config = {
-            "developer_id": input("Enter your Developer ID: ").strip(),
-            "auth_token": input("Enter your CryptoPond Auth Token: ").strip(),
-            "gemini_api_key": input("Enter your Gemini API Key: ").strip(),
-            "last_post_time": datetime.now().isoformat(),
-            "last_vote_time": datetime.now().isoformat()
-        }
-        with open(CONFIG_FILE, "w") as f:
-            json.dump(config, f, indent=2)
-        print("💾 Saved config to config.json")
-        return config
+        print("⚙️ Config file not found. Trying to auto-fetch from JWT JSON input...")
+
+        raw_jwt_input = input("Paste your JWT JSON string: ").strip()
+        try:
+            jwt_data = json.loads(raw_jwt_input)
+            config = {
+                "developer_id": str(jwt_data.get("developer_id")),
+                "auth_token": jwt_data.get("jwt"),
+                "gemini_api_key": input("Enter your Gemini API Key: ").strip(),
+                "last_post_time": datetime.now().isoformat(),
+                "last_vote_time": datetime.now().isoformat()
+            }
+            with open(CONFIG_FILE, "w") as f:
+                json.dump(config, f, indent=2)
+            print("💾 Auto-fetched and saved config to config.json")
+            return config
+        except Exception as e:
+            print("❌ Failed to parse JWT JSON. Please check your input.")
+            raise e
+
 
 config = load_or_ask_config()
 DEVELOPER_ID = config["developer_id"]
