@@ -134,16 +134,16 @@ def should_vote():
     return datetime.now() - last >= timedelta(hours=48)
 
 def scheduled_post():
-    print(f"\n📆 Posting idea at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"\n📆 Posting idea at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} UTC")
     get_user_points()
     name, subtitle, desc_text = generate_crypto_idea()
-    print(f"\n📌 {name} - {subtitle}\n📝 {desc_text}")
+    print(f"\n📌Name : {name}\n Subtitle : {subtitle}\nDescription : {desc_text}")
     desc_json = build_description_block(desc_text)
     post_to_cryptopond(name, subtitle, desc_json)
 
 
 def scheduled_vote():
-    print(f"\n📆 Voting at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"\n📆 Voting at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} UTC")
     get_user_points()
     vote_count, ws, we = get_vote_history()
     remaining = max(0, 3 - vote_count)
